@@ -4,6 +4,23 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="bbclib" displayName="bbclib" projectFiles="true">
+        <logicalFolder name="include" displayName="include" projectFiles="true">
+          <itemPath>../../bbclib/include/compat.h</itemPath>
+          <itemPath>../../bbclib/include/version.h</itemPath>
+          <itemPath>../../bbclib/include/uart-foo.h</itemPath>
+          <itemPath>../../bbclib/include/bbclib.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <itemPath>../../bbclib/src/bb_printf.c</itemPath>
+          <itemPath>../../bbclib/src/uart-foo.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="structures" displayName="structures" projectFiles="true">
+          <itemPath>../../bbclib/structures/rbuffer-add-line.c</itemPath>
+          <itemPath>../../bbclib/structures/rbuffer-get-line.c</itemPath>
+          <itemPath>../../bbclib/structures/rbuffer.h</itemPath>
+        </logicalFolder>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -19,9 +36,12 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>../../bbclib</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="default" type="2">
+    <conf name="pic24fj" type="3">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <targetDevice>PIC24FJ128GA010</targetDevice>
@@ -33,14 +53,8 @@
         <platform>2</platform>
       </toolsSet>
       <compileType>
-        <linkerTool>
-          <linkerLibItems>
-          </linkerLibItems>
-        </linkerTool>
-        <loading>
-          <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <alternateLoadableFile></alternateLoadableFile>
-        </loading>
+        <archiverTool>
+        </archiverTool>
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
@@ -65,12 +79,12 @@
         <property key="enable-short-double" value="false"/>
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
-        <property key="extra-include-directories" value=""/>
-        <property key="isolate-each-function" value="false"/>
+        <property key="extra-include-directories" value="../../bbclib"/>
+        <property key="isolate-each-function" value="true"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
         <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
-        <property key="oXC16gcc-data-sects" value="false"/>
+        <property key="oXC16gcc-data-sects" value="true"/>
         <property key="oXC16gcc-errata" value=""/>
         <property key="oXC16gcc-fillupper" value=""/>
         <property key="oXC16gcc-large-aggregate" value="false"/>
@@ -79,16 +93,17 @@
         <property key="oXC16gcc-name-text-sec" value=""/>
         <property key="oXC16gcc-near-chars" value="false"/>
         <property key="oXC16gcc-no-isr-warn" value="false"/>
-        <property key="oXC16gcc-sfr-warn" value="false"/>
+        <property key="oXC16gcc-sfr-warn" value="true"/>
         <property key="oXC16gcc-smar-io-lvl" value="1"/>
         <property key="oXC16gcc-smart-io-fmt" value=""/>
-        <property key="optimization-level" value="0"/>
+        <property key="optimization-level" value="1"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
-        <property key="preprocessor-macros" value=""/>
+        <property key="preprocessor-macros" value="__microchip_inside_;__pic24fj__"/>
         <property key="scalar-model" value="default"/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
+        <appendMe value="-Wextra -pedantic"/>
       </C30>
       <C30-AS>
       </C30-AS>
@@ -139,14 +154,65 @@
       </C30-LD>
       <C30Global>
         <property key="fast-math" value="false"/>
-        <property key="generic-16-bit" value="false"/>
+        <property key="generic-16-bit" value="true"/>
         <property key="legacy-libc" value="false"/>
         <property key="oXC16glb-macros" value=""/>
         <property key="output-file-format" value="elf"/>
         <property key="relaxed-math" value="false"/>
-        <property key="save-temps" value="false"/>
+        <property key="save-temps" value="true"/>
       </C30Global>
       <ICD3PlatformTool>
+        <property key="ADC 1" value="true"/>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="CRC" value="true"/>
+        <property key="Freeze All Other Peripherals" value="true"/>
+        <property key="I2C1" value="true"/>
+        <property key="I2C2" value="true"/>
+        <property key="INPUT CAPTURE 1" value="true"/>
+        <property key="INPUT CAPTURE 2" value="true"/>
+        <property key="INPUT CAPTURE 3" value="true"/>
+        <property key="INPUT CAPTURE 4" value="true"/>
+        <property key="INPUT CAPTURE 5" value="true"/>
+        <property key="OUTPUT COMPARE 1" value="true"/>
+        <property key="OUTPUT COMPARE 2" value="true"/>
+        <property key="OUTPUT COMPARE 3" value="true"/>
+        <property key="OUTPUT COMPARE 4" value="true"/>
+        <property key="OUTPUT COMPARE 5" value="true"/>
+        <property key="SPI 1" value="true"/>
+        <property key="SPI 2" value="true"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="TIMER1" value="true"/>
+        <property key="TIMER2" value="true"/>
+        <property key="TIMER3" value="true"/>
+        <property key="TIMER4" value="true"/>
+        <property key="TIMER5" value="true"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="UART 1" value="true"/>
+        <property key="UART 2" value="true"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="hwtoolclock.frcindebug" value="false"/>
+        <property key="memories.aux" value="false"/>
+        <property key="memories.bootflash" value="false"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.end" value="0x157fb"/>
+        <property key="memories.programmemory.start" value="0x0"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveprogramrange.end" value="0x157fb"/>
+        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
+        <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.testmodeentrymethod" value="VPPFirst"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="voltagevalue" value="3.25"/>
       </ICD3PlatformTool>
     </conf>
   </confs>

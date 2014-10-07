@@ -4,6 +4,9 @@
 *.obj
 *.elf
 *.hex
+*.i
+*.o.d
+/build
 
 # Precompiled Headers
 *.gch
